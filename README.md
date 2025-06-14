@@ -1,69 +1,72 @@
-🛡️ CloakDrain – Magisk Module
-Version: 2.6
-Author: J
-Support: None – this is an “as-is” tool
-Requires: Magisk + Root + Android 10+
-Tested on: Pixel 6a with LineageOS
+# 🛡️ CloakDrain – A Stealth Battery Saver (Magisk Module)
 
-💡 What is CloakDrain?
-CloakDrain is a lightweight, fully script-based Magisk module designed to aggressively reduce background activity and battery drain — especially while the screen is off.
-No apps, no UI, no frills — just clean control via the terminal.
+**Version:** 2.6  
+**Author:** J  
+**Support:** None – this is an “as-is” tool. Use at your own risk.  
+**Requires:** Magisk + Root + Android 10+  
+**Tested on:** Pixel 6a running LineageOS
 
-⚙️ What does it do?
-When you run cloakdrain on, it activates a “stealth power-saving mode” by:
+---
 
-🔋 Setting the CPU governor to powersave
+## 💡 What is CloakDrain?
 
-🧊 Reducing maximum CPU frequency (reinforced twice for persistence)
+CloakDrain is a lightweight, script-only Magisk module that enables a stealthy, aggressive battery saving mode — especially when the screen is off.  
+It requires no user interface, no apps, and no background services.  
+Control everything via simple terminal commands.
 
-📍 Disabling location services (location_mode 0)
+---
 
-🛰️ Turning off all sensors (sensors_off 1)
+## 🔧 Features
 
-🎙️ Blocking microphone and camera access via AppOps
+When running `cloakdrain on`, the module will:
 
-🚫 Disabling common bloatware apps (e.g., TikTok, Facebook – only if installed)
+- 🧊 Set CPU governor to `powersave`
+- 🔻 Lower maximum CPU frequency (applied twice to enforce)
+- 📍 Disable location services (`location_mode 0`)
+- 🛰️ Turn off sensors (`sensors_off 1`)
+- 🎙️ Block microphone and camera access via AppOps
+- 🚫 Disable known bloatware apps (TikTok, Facebook) if installed
+- 📡 Enable Wi-Fi scan throttling
+- ⏱️ Slow down wake-up timers (`alarm_manager_constants`)
+- 📉 Disable background data usage
+- 🧾 Log activity to: `/data/adb/cloakdrain_log.txt`
 
-📡 Enabling Wi-Fi scan throttling
+When running `cloakdrain off`, the module:
 
-⏱️ Slowing down wake-up timers with alarm_manager_constants
+- Restores CPU governor to `schedutil`
+- Re-enables sensors and location
+- Reverts background and alarm settings
+- Re-enables previously disabled apps (if any)
 
-📉 Disabling background data
+---
 
-🧾 Logging every action to: /data/adb/cloakdrain_log.txt
+## 🧪 Usage
 
-🔁 When you run cloakdrain off, it restores:
-CPU governor to schedutil
+In a root shell (`adb shell` or Termux):
 
-Sensors and location services back on
-
-Background data and alarms to default
-
-Re-enables previously disabled apps
-
-🧪 Usage
-In terminal (via adb shell or Termux):
-
-bash
-Copy
-Edit
+```bash
 su
-cloakdrain on     # Enable stealth battery saving
-cloakdrain off    # Restore normal behavior
-cloakdrain status # Check if CloakDrain is active
-📝 Notes
-Works silently in the background
+cloakdrain on      # Enable stealth mode
+cloakdrain off     # Restore normal mode
+cloakdrain status  # Check current status
+📂 Installation
+Flash the ZIP via Magisk
 
-Can be combined with auto-toggle scripts (e.g., screen-off triggers)
+Reboot
 
-“As-is” release – no support, no hand-holding, just works
+Use the terminal to toggle on/off
 
-🔥 Ideal for:
-Privacy-focused users
+(Optional) Automate with screen-off triggers via screen_monitor.sh (included in module)
 
-Low-power / offline setups
+🚫 Disclaimer
+This module is provided “as-is”. No support, no updates, no guarantees.
+If it breaks your device, sets your phone on fire, or ruins your coffee... that’s on you.
 
-Phones that heat up unnecessarily
+✅ Ideal for:
+Power users and privacy nerds
 
-Anyone who wants to tame background processes
+Minimalist / Google-free setups
 
+Digital detoxing or “offline-first” use
+
+Anyone annoyed by excessive wake locks and background drain
